@@ -51,7 +51,7 @@ bot.dialog('/', [
 			session.userData.response = msg;
 		}
 
-		session.userData.response += "\n" + JSON.Stringify(commands);
+		session.userData.response += "\n" + JSON.stringify(commands);
 
 		if (session.userData.response) {
 			session.send(session.userData.response);
