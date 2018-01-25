@@ -2,11 +2,14 @@
 A simple echo bot for the Microsoft Bot Framework. 
 -----------------------------------------------------------------------------*/
 
+var commands = {};
+
+commands['echo'] = require('./lib/commands/echo');
+commands['haiku'] = require('./lib/commands/haiku');
+
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
-
-var commands = require('./lib/commands');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -43,7 +46,7 @@ bot.dialog('/', [
 		var msg = session.message.text.replace('@Aster', '').trimLeft().trimRight();
 		session.userData.message = msg;
 
-		if ( msg in commands ) {
+		if ( commands[msg] ) {
 			session.userData.cmd = msg;
 
 			session.userData.response = commands[msg]();
@@ -51,7 +54,7 @@ bot.dialog('/', [
 			session.userData.response = msg;
 		}
 
-		session.userData.response += "\n" + JSON.stringify(commands);
+		//session.userData.response += "\n" + JSON.stringify(commands);
 
 		if (session.userData.response) {
 			session.send(session.userData.response);
