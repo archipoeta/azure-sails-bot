@@ -6,7 +6,7 @@ var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
 
-var commands = require('lib/commands');
+var commands = require('./lib/commands');
 
 // Setup Restify Server
 var server = restify.createServer();
