@@ -48,8 +48,7 @@ bot.dialog('/', [
 
 		if ( commands[msg] ) {
 			session.userData.cmd = msg;
-
-			session.userData.response = commands[msg]();
+			session.userData.response = commands[msg](session);
 		} else {
 			session.userData.response = msg;
 		}
