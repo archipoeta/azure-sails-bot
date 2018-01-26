@@ -2,15 +2,15 @@
 A simple echo bot for the Microsoft Bot Framework. 
 -----------------------------------------------------------------------------*/
 
-var commands = {};
-
-commands['echo'] = require('./lib/commands/echo');
-commands['haiku'] = require('./lib/commands/haiku');
-
 var fs = require("fs");
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
+
+var commands = {};
+
+commands['echo'] = require('./lib/commands/echo');
+commands['haiku'] = require('./lib/commands/haiku');
 
 var haiku = JSON.parse(fs.readFileSync("./lib/commands/haiku.json"));
 
