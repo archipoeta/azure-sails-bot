@@ -13,6 +13,12 @@ commands['echo'] = require('./lib/commands/echo');
 commands['haiku'] = require('./lib/commands/haiku');
 
 var haiku = JSON.parse(fs.readFileSync("./lib/commands/haiku.json"));
+	var index = Math.floor(Math.random() * Math.floor(haiku.length));
+	var s = haiku[index].data;
+	s += "\n";
+	s += " --" + haiku[index].author;
+console.log(s);
+
 
 // Setup Restify Server
 var server = restify.createServer();
