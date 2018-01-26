@@ -7,9 +7,12 @@ var commands = {};
 commands['echo'] = require('./lib/commands/echo');
 commands['haiku'] = require('./lib/commands/haiku');
 
+var fs = require("fs");
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
+
+var haiku = JSON.parse(fs.readFileSync("./lib/commands/haiku.json"));
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -44,6 +47,9 @@ bot.set('storage', tableStorage);
 bot.dialog('/', [
     function (session) {
 		var msg = session.message.text.replace('@Aster', '').trimLeft().trimRight();
+
+		// Setup various userData
+		session.userData.haiku = haiku;
 		session.userData.message = msg;
 
 		if ( commands[msg] ) {
