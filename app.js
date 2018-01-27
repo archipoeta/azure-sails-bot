@@ -60,6 +60,9 @@ bot.dialog('/', [
 				if (typeof output === 'function' || typeof output === 'object') {
 					var _s = new builder.Message(session).addAttachment(output);
 					session.send(_s).endDialog();
+				} else {
+					session.userData.response = output;
+					session.send(session.userData.response);
 				}
 			}
 		} else {
