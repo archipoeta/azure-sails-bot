@@ -64,7 +64,12 @@ bot.dialog('/', [
 		//session.userData.response += "\n" + JSON.stringify(commands);
 
 		if (session.userData.response) {
-			session.send(session.userData.response);
+			if ( (typeof session.userData.response === 'function') || (typeof session.userData.response === 'object') ) {
+				var _s = new builder.Message(session).addAttachment(session.userData.response);
+        		session.send(_s);
+			} else {
+				session.send(session.userData.response);
+			}
 		}
 
         //builder.Prompts.text(session, "Hello... What's your name?");
