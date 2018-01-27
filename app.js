@@ -47,11 +47,23 @@ bot.set('storage', tableStorage);
 bot.dialog('/', [
     function (session) {
 		var msg = session.message.text.replace('@Aster', '').trimLeft().trimRight();
-		var cmd = msg.replace(new RegExp('\s.+'), '').trimLeft().trimRight();
+		var cmd_syntax = new RegExp('([\s]*[a-z0-9\_\-]+)');
+		var cmd = msg.match(cmd_syntax).trimLeft().trimRight();
+		cmd = cmd[1];
+
+		var args = [];
+		if ( msg.match( /\n/ ) ) {
+			var lines = msg.split(/\n/);
+			args = lines[0].split(/\s+/);
+		} else {
+			args = msg.split(/\s+/);
+		}
+		args = args.slice(1);
 
 		// Setup various userData
 		session.userData.haiku = haiku;
 		session.userData.command = cmd;
+		session.userData.paramters = args;
 		session.userData.message = msg;
 
 		if ( commands[cmd] ) {
