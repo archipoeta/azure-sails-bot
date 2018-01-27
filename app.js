@@ -47,14 +47,15 @@ bot.set('storage', tableStorage);
 bot.dialog('/', [
     function (session) {
 		var msg = session.message.text.replace('@Aster', '').trimLeft().trimRight();
+		var cmd = msg.replace(/\s.+/, '').trimLeft().trimRight();
 
 		// Setup various userData
 		session.userData.haiku = haiku;
+		session.userData.command = cmd;
 		session.userData.message = msg;
 
-		if ( commands[msg] ) {
-			session.userData.cmd = msg;
-			session.userData.response = commands[msg](session);
+		if ( commands[cmd] ) {
+			session.userData.response = commands[cmd](session);
 		} else {
 			session.userData.response = msg;
 		}
