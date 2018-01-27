@@ -50,6 +50,7 @@ bot.dialog('/', [
 		var cmd = msg.replace(/\s.+/, '').trimLeft().trimRight();
 
 		// Setup various userData
+		session.userData.builder = builder;
 		session.userData.haiku = haiku;
 		session.userData.command = cmd;
 		session.userData.message = msg;
