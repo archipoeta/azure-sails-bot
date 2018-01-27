@@ -50,21 +50,18 @@ bot.dialog('/', [
 		var cmd = msg.replace(/\s.+/, '').trimLeft().trimRight();
 
 		// Setup various userData
-		session.userData.builder = builder;
 		session.userData.haiku = haiku;
 		session.userData.command = cmd;
 		session.userData.message = msg;
 
 		if ( commands[cmd] ) {
-			session.userData.response = commands[cmd](session);
+			session.userData.response = commands[cmd](session, builder);
 		} else {
 			session.userData.response = msg;
 		}
 
-		//session.userData.response += "\n" + JSON.stringify(commands);
-
 		if (session.userData.response) {
-			if ( (typeof session.userData.response === 'function') || (typeof session.userData.response === 'object') ) {
+			if (typeof session.userData.response === 'function' || typeof session.userData.response === 'object') {
 				var _s = new builder.Message(session).addAttachment(session.userData.response);
         		session.send(_s);
 			} else {
