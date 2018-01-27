@@ -63,7 +63,7 @@ bot.dialog('/', [
 		if (session.userData.response) {
 			if (typeof session.userData.response === 'function' || typeof session.userData.response === 'object') {
 				var _s = new builder.Message(session).addAttachment(session.userData.response);
-        		session.send(_s);
+        		session.send(_s).endDialog();
 			} else {
 				session.send(session.userData.response);
 			}
