@@ -55,18 +55,16 @@ bot.dialog('/', [
 		session.userData.message = msg;
 
 		if ( commands[cmd] ) {
-			session.userData.response = commands[cmd](session, builder);
+			var output = commands[cmd](session, builder);
+			if (output) {
+				if (typeof output === 'function' || typeof output === 'object') {
+					var _s = new builder.Message(session).addAttachment(output);
+					session.send(_s).endDialog();
+				}
+			}
 		} else {
 			session.userData.response = msg;
-		}
-
-		if (session.userData.response) {
-			if (typeof session.userData.response === 'function' || typeof session.userData.response === 'object') {
-				var _s = new builder.Message(session).addAttachment(session.userData.response);
-        		session.send(_s).endDialog();
-			} else {
-				session.send(session.userData.response);
-			}
+			session.send(session.userData.response);
 		}
 
         //builder.Prompts.text(session, "Hello... What's your name?");
