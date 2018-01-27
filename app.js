@@ -63,7 +63,7 @@ bot.dialog('/', [
 		// Setup various userData
 		session.userData.haiku = haiku;
 		session.userData.command = cmd;
-		session.userData.paramters = args;
+		session.userData.parameters = args;
 		session.userData.message = msg;
 
 		if ( commands[cmd] ) {
