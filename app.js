@@ -17,6 +17,7 @@ var libs = {
 
 commands['echo'] = require('./lib/commands/echo');
 commands['haiku'] = require('./lib/commands/haiku');
+commands['youtube'] = require('./lib/commands/youtube');
 
 var haiku = JSON.parse(fs.readFileSync('./lib/commands/haiku.json'));
 
