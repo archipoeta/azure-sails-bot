@@ -3,11 +3,17 @@ A simple echo bot for the Microsoft Bot Framework.
 -----------------------------------------------------------------------------*/
 
 var fs = require("fs");
+var https = require("https");
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
 
 var commands = {};
+var libs = {
+	'fs': fs,
+	'https': https,
+	'builder': builder
+};
 
 commands['echo'] = require('./lib/commands/echo');
 commands['haiku'] = require('./lib/commands/haiku');
@@ -67,7 +73,7 @@ bot.dialog('/', [
 		session.userData.message = msg;
 
 		if ( commands[cmd] ) {
-			var output = commands[cmd](session, builder);
+			var output = commands[cmd](session, libs);
 			if (output) {
 				if (typeof output === 'function' || typeof output === 'object') {
 					var _s = new builder.Message(session).addAttachment(output);
