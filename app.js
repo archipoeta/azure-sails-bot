@@ -46,9 +46,9 @@ bot.set('storage', tableStorage);
 
 bot.dialog('/', [
     function (session) {
-		var msg = session.message.text.replace('@Aster', '').trimLeft().trimRight();
+		var msg = session.message.text.replace('@Aster', '').trimLeft();
 		var cmd_syntax = new RegExp('([\s]*[a-z0-9\_\-]+)');
-		var cmd = msg.match(cmd_syntax).trimLeft().trimRight();
+		var cmd = msg.match(cmd_syntax);
 		cmd = cmd[1];
 
 		var args = [];
