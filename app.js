@@ -47,7 +47,7 @@ bot.set('storage', tableStorage);
 bot.dialog('/', [
     function (session) {
 		var msg = session.message.text.replace('@Aster', '').trimLeft().trimRight();
-		var cmd = msg.replace(/\s.+/, '').trimLeft().trimRight();
+		var cmd = msg.replace(new RegExp(/\s.+/), '').trimLeft().trimRight();
 
 		// Setup various userData
 		session.userData.haiku = haiku;
