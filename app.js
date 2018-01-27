@@ -12,6 +12,8 @@ var commands = {};
 commands['echo'] = require('./lib/commands/echo');
 commands['haiku'] = require('./lib/commands/haiku');
 
+var haiku = JSON.parse(fs.readFileSync('./lib/commands/haiku.json'));
+
 // Setup Restify Server
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
